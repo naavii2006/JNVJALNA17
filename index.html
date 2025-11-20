@@ -1,5 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporarily Closed for Maintenance</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for a dark, professional theme */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Dark background similar to a code editor */
+        }
+        .container-card {
+            background-color: #161b22; /* Slightly lighter card background */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid #30363d;
+        }
+        .main-text {
+            color: #c9d1d9; /* Light gray text for contrast */
+        }
+        .highlight-text {
+            color: #58a6ff; /* Blue highlight for links/important text */
+        }
+        .icon {
+            animation: pulse-shake 2s infinite;
+        }
+        @keyframes pulse-shake {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.05) rotate(0.5deg); opacity: 0.8; }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <!-- Maintenance Card Container -->
+    <div class="container-card max-w-lg w-full p-8 md:p-12 rounded-2xl text-center">
+
+        <!-- Icon (Wrench/Gear SVG for Maintenance) -->
+        <div class="flex justify-center mb-6">
+            <svg class="icon w-20 h-20 highlight-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v-4m-4-4v-4m0 8h4m-4-4h4"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12a9 9 0 1118 0 9 9 0 01-18 0z"></path>
+            </svg>
+        </div>
+        
+        <!-- Current Date Added Here -->
+        <div class="text-sm font-light main-text opacity-50 mb-2">
+            Status Refreshed: <span id="current-date"></span>
+        </div>
+
+        <!-- Main Title -->
+        <h1 class="text-4xl font-extrabold main-text mb-4">
+            System Under Maintenance
+        </h1>
+
+        <!-- Subtitle/Status Message -->
+        <p class="text-xl font-medium text-red-400 mb-6">
+            We are temporarily closed for important updates.
+        </p>
+
+        <!-- Detailed Explanation -->
+        <p class="text-base main-text opacity-80 mb-8 leading-relaxed">
+            We're currently performing essential system upgrades to improve stability, security, and performance. We apologize for any inconvenience this may cause and appreciate your patience.
+        </p>
+
+        <!-- Estimated Time / Contact Info -->
+        <div class="bg-[#21262d] p-4 rounded-xl border border-[#30363d] mb-8">
+            <p class="text-sm font-semibold highlight-text mb-2 uppercase tracking-wider">
+                Expected Downtime
+            </p>
+            <p class="text-lg font-bold main-text">
+                Back Online by: <span class="text-yellow-400">04:00 PM UTC</span>
+            </p>
+        </div>
+
+        <!-- Call to Action / Socials -->
+        <!-- Email address updated to placeholder -->
+        <p class="text-sm main-text opacity-70">
+            For urgent inquiries, please contact us at <a href="mailto:lightphoton3108.com" class="highlight-text hover:underline font-semibold">lightphoton3108@gmail.com</a>.
+        </p>
+
+    </div>
+
+    <script>
+        // JavaScript to insert the current date
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateElement = document.getElementById('current-date');
+            if (dateElement) {
+                const today = new Date();
+                // Formats the date as "November 20, 2025"
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                dateElement.textContent = today.toLocaleDateString('en-US', options);
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -2911,3 +3013,4 @@
 
 </html>
 
+ -->
