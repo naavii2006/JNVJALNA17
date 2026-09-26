@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JNV Jalna | Class of '24 Legacy Portal</title>
+  <title>JNV Jalna | The Ultimate '24 Legacy</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #0f172a;
-      --bg-card: rgba(30, 41, 59, 0.7);
-      --primary: #38bdf8;
-      --accent: #fbbf24;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
+      --bg-dark: #050b14;
+      --bg-card: rgba(10, 15, 30, 0.4);
+      --primary: #00f0ff;
+      --primary-glow: rgba(0, 240, 255, 0.5);
+      --accent: #ff003c;
+      --accent-glow: rgba(255, 0, 60, 0.5);
+      --text-main: #ffffff;
+      --text-muted: #8a9bb2;
       --border-light: rgba(255, 255, 255, 0.1);
       
-      /* House Colors (Refined for Dark Theme) */
-      --aravli: #3b82f6;
-      --nilgiri: #10b981;
-      --shiwalik: #ef4444;
-      --udaygiri: #f59e0b;
+      /* House Colors - Neon Variants */
+      --aravli: #0088ff;
+      --nilgiri: #00ff88;
+      --shiwalik: #ff3366;
+      --udaygiri: #ffcc00;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -38,623 +37,359 @@
       line-height: 1.6;
     }
 
-    /* Ambient Animated Background */
-    .ambient-bg {
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+    /* ======= PRELOADER ======= */
+    #preloader {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
-      z-index: -1;
-      background: radial-gradient(circle at 15% 50%, rgba(56, 189, 248, 0.05), transparent 25%),
-                  radial-gradient(circle at 85% 30%, rgba(251, 191, 36, 0.05), transparent 25%);
-      filter: blur(60px);
-    }
-
-    h1, h2, h3 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 600;
-    }
-
-    /* ======= NAVBAR ======= */
-    nav {
-      position: fixed;
-      top: 0; width: 100%;
-      background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border-light);
-      padding: 1rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text-main);
-      letter-spacing: 1px;
-    }
-    
-    .logo span {
-      color: var(--primary);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.3s;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .nav-links a:hover {
-      color: var(--primary);
-    }
-
-    /* ======= HERO SECTION ======= */
-    .hero {
-      min-height: 100vh;
+      background: var(--bg-dark);
+      z-index: 9999;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center;
-      padding: 0 20px;
-      position: relative;
+      transition: opacity 1s ease-out, visibility 1s;
     }
-
-    .hero-badge {
-      padding: 8px 16px;
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      border-radius: 30px;
-      color: var(--primary);
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .hero h1 {
-      font-size: clamp(3rem, 5vw, 5rem);
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      background: linear-gradient(to right, #fff, #94a3b8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
+    .loader-text {
+      font-family: 'Space Mono', monospace;
       font-size: 1.2rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin-bottom: 2rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+      letter-spacing: 4px;
+      animation: pulse 1.5s infinite;
     }
-
-    /* ======= TIME MACHINE METRICS ======= */
-    .metrics-container {
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 2rem;
-    }
-
-    .metric-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border-light);
-      padding: 2rem;
-      border-radius: 16px;
-      min-width: 200px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      transform: translateY(0);
-      transition: transform 0.3s, border-color 0.3s;
-    }
-
-    .metric-box:hover {
-      transform: translateY(-5px);
-      border-color: var(--primary);
-    }
-
-    .metric-number {
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .metric-label {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    /* ======= DRAGGABLE NOTICE BOARD ======= */
-    .notice-board-section {
-      padding: 100px 5%;
-      position: relative;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .section-header h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .section-header p {
-      color: var(--text-muted);
-    }
-
-    .board-container {
-      width: 100%;
-      height: 600px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px dashed var(--border-light);
-      border-radius: 20px;
+    .loader-bar {
+      width: 200px; height: 2px;
+      background: rgba(255,255,255,0.1);
       position: relative;
       overflow: hidden;
     }
-
-    .sticky-note {
-      position: absolute;
-      width: 220px;
-      padding: 20px;
-      background: #fef3c7;
-      color: #1e293b;
-      border-radius: 2px 2px 15px 2px;
-      box-shadow: 2px 4px 10px rgba(0,0,0,0.3);
-      cursor: grab;
-      user-select: none;
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 1.1rem;
-      transition: transform 0.2s;
+    .loader-progress {
+      position: absolute; top: 0; left: 0; height: 100%;
+      background: var(--primary);
+      width: 0%;
+      box-shadow: 0 0 10px var(--primary);
+      animation: loadBar 2s cubic-bezier(0.7, 0, 0.3, 1) forwards;
     }
+    @keyframes loadBar { 100% { width: 100%; } }
+    @keyframes pulse { 50% { opacity: 0.5; } }
+
+    /* ======= BACKGROUND & PARTICLES ======= */
+    .ambient-bg {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: -2;
+      background: radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.05), transparent 40%),
+                  radial-gradient(circle at 90% 80%, rgba(255, 0, 60, 0.05), transparent 40%);
+    }
+
+    /* ======= NAVBAR ======= */
+    nav {
+      position: fixed; top: 0; width: 100%;
+      background: rgba(5, 11, 20, 0.7);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 1.2rem 5%;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 1000;
+      transition: transform 0.4s;
+    }
+    .logo {
+      font-size: 1.8rem; font-weight: 700; color: var(--text-main);
+      font-family: 'Space Mono', monospace; letter-spacing: -1px;
+    }
+    .logo span { color: var(--primary); text-shadow: 0 0 15px var(--primary-glow); }
     
-    .sticky-note:active {
-      cursor: grabbing;
-      transform: scale(1.05);
-      z-index: 100;
-    }
-
-    .note-pin {
-      width: 12px;
-      height: 12px;
-      background: #ef4444;
-      border-radius: 50%;
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2);
-    }
-
-    .note-author {
-      display: block;
-      margin-top: 15px;
-      font-size: 0.85rem;
-      font-family: 'Inter', sans-serif;
-      font-style: normal;
-      font-weight: 600;
-      text-align: right;
-      color: #64748b;
-    }
-
-    /* ======= JNV ROUTINE TIMELINE ======= */
-    .routine-section {
-      padding: 100px 5%;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .timeline-container {
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-main); text-decoration: none; font-size: 0.9rem;
+      font-weight: 500; text-transform: uppercase; letter-spacing: 2px;
       position: relative;
-      margin-top: 3rem;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -5px; left: 0; width: 0%;
+      height: 2px; background: var(--primary); transition: width 0.3s;
+      box-shadow: 0 0 10px var(--primary);
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ======= HERO SECTION ======= */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center;
+      padding: 0 20px; position: relative;
+    }
+    .hero-badge {
+      padding: 10px 20px;
+      background: rgba(0, 240, 255, 0.05);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 50px; color: var(--primary); font-size: 0.9rem;
+      font-family: 'Space Mono', monospace; letter-spacing: 3px;
+      margin-bottom: 2rem; box-shadow: 0 0 20px rgba(0,240,255,0.1);
+    }
+    .hero h1 {
+      font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1; margin-bottom: 1.5rem;
+      font-weight: 700; letter-spacing: -2px;
+      background: linear-gradient(135deg, #fff 0%, #7a8b9e 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+    }
+    .hero p {
+      font-size: 1.3rem; color: var(--text-muted); max-width: 700px;
+      margin-bottom: 3rem; font-weight: 300;
     }
 
+    /* ======= METRICS (TIME MACHINE) ======= */
+    .metrics-container { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+    .metric-box {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      padding: 2.5rem; border-radius: 20px; min-width: 240px;
+      backdrop-filter: blur(12px); text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.02);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .metric-box:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: var(--primary);
+      box-shadow: 0 15px 40px rgba(0,240,255,0.2), inset 0 0 20px rgba(0,240,255,0.1);
+    }
+    .metric-number {
+      font-size: 4rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;
+      font-family: 'Space Mono', monospace;
+      text-shadow: 0 0 20px var(--primary-glow);
+    }
+    .metric-label {
+      color: var(--primary); font-size: 0.85rem; text-transform: uppercase;
+      letter-spacing: 2px; font-weight: 600;
+    }
+
+    /* ======= SCROLL REVEAL ANIMATIONS ======= */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+    }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* ======= JNV ROUTINE SECTION ======= */
+    .section-header { text-align: center; margin-bottom: 4rem; }
+    .section-header h2 {
+      font-size: 3rem; margin-bottom: 1rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: -1px;
+    }
+    .routine-section { padding: 120px 5%; max-width: 1200px; margin: 0 auto; }
+    .timeline-container { position: relative; }
     .timeline-line {
-      position: absolute;
-      left: 50%;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: rgba(56, 189, 248, 0.2);
-      transform: translateX(-50%);
+      position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--primary), transparent);
+      transform: translateX(-50%); opacity: 0.5;
     }
-
     .timeline-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 3rem;
-      position: relative;
-      width: 100%;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 4rem; position: relative; width: 100%;
     }
-
-    /* Alternate items left and right */
-    .timeline-item:nth-child(even) {
-      flex-direction: row-reverse;
-    }
-
+    .timeline-item:nth-child(even) { flex-direction: row-reverse; }
     .timeline-time {
-      width: 45%;
-      font-size: 1.5rem;
-      font-family: 'Playfair Display', serif;
-      color: var(--primary);
-      font-weight: 600;
-      text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+      width: 45%; font-size: 2rem; font-family: 'Space Mono', monospace;
+      color: var(--primary); font-weight: 700; text-shadow: 0 0 15px var(--primary-glow);
     }
-
-    .timeline-item:nth-child(odd) .timeline-time {
-      text-align: right;
-      padding-right: 2rem;
-    }
-
-    .timeline-item:nth-child(even) .timeline-time {
-      text-align: left;
-      padding-left: 2rem;
-    }
-
+    .timeline-item:nth-child(odd) .timeline-time { text-align: right; padding-right: 3rem; }
+    .timeline-item:nth-child(even) .timeline-time { text-align: left; padding-left: 3rem; }
+    
     .timeline-content {
-      width: 45%;
-      background: var(--bg-card);
-      padding: 1.5rem;
-      border-radius: 12px;
-      border: 1px solid var(--border-light);
-      backdrop-filter: blur(10px);
-      transition: transform 0.3s, border-color 0.3s;
+      width: 45%; background: var(--bg-card); padding: 2rem; border-radius: 16px;
+      border: 1px solid var(--border-light); backdrop-filter: blur(10px);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-
     .timeline-content:hover {
       transform: translateY(-5px);
-      border-color: var(--accent);
+      box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15);
+      border-color: rgba(0, 240, 255, 0.5);
     }
-
-    .timeline-content h3 {
-      font-size: 1.2rem;
-      color: var(--text-main);
-      margin-bottom: 0.5rem;
-    }
-
-    .timeline-content p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    /* The glowing dot on the timeline */
     .timeline-item::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 16px;
-      height: 16px;
-      background: var(--bg-dark);
-      border: 3px solid var(--accent);
-      border-radius: 50%;
-      z-index: 2;
-      box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+      content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      width: 20px; height: 20px; background: var(--bg-dark);
+      border: 4px solid var(--primary); border-radius: 50%; z-index: 2;
+      box-shadow: 0 0 20px var(--primary-glow); transition: transform 0.3s;
+    }
+    .timeline-item:hover::after { transform: translate(-50%, -50%) scale(1.3); background: var(--primary); }
+
+    /* ======= NOTICE BOARD ======= */
+    .notice-board-section { padding: 100px 5%; position: relative; }
+    .board-container {
+      width: 100%; height: 600px; background: rgba(255, 255, 255, 0.01);
+      border: 1px dashed rgba(255, 255, 255, 0.1); border-radius: 20px;
+      position: relative; overflow: hidden;
+    }
+    .sticky-note {
+      position: absolute; width: 250px; padding: 25px;
+      background: linear-gradient(135deg, #fff9c4, #fbc02d);
+      color: #000; border-radius: 2px 15px 2px 2px;
+      box-shadow: 5px 10px 20px rgba(0,0,0,0.5);
+      cursor: grab; user-select: none;
+      font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .sticky-note:active { cursor: grabbing; transform: scale(1.1) rotate(0deg) !important; z-index: 100; box-shadow: 10px 20px 30px rgba(0,0,0,0.6); }
+    .tape {
+      position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg);
+      width: 80px; height: 25px; background: rgba(255,255,255,0.4);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2); backdrop-filter: blur(2px);
+    }
+    .note-author {
+      display: block; margin-top: 15px; font-size: 0.9rem;
+      font-family: 'Inter', sans-serif; font-style: normal; font-weight: 700; text-align: right;
     }
 
-    /* ======= CLASSMATES ROSTER ======= */
-    .roster-section {
-      padding: 100px 5%;
-    }
-
-    .filter-container {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
-    }
-
-    .filter-btn {
-      background: transparent;
-      border: 1px solid var(--border-light);
-      color: var(--text-muted);
-      padding: 8px 24px;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: all 0.3s;
-    }
-
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--text-main);
-      color: var(--bg-dark);
-      border-color: var(--text-main);
-    }
-
+    /* ======= 3D ROSTER ======= */
+    .roster-section { padding: 120px 5%; max-width: 1400px; margin: 0 auto; }
     .roster-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1.5rem;
-      max-width: 1200px;
-      margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem;
+      perspective: 1000px; /* Required for 3D effect */
     }
-
     .roster-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-light);
-      border-radius: 16px;
-      padding: 2rem 1.5rem;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      transition: transform 0.3s, border-color 0.3s;
-      position: relative;
-      overflow: hidden;
+      background: linear-gradient(145deg, rgba(20,25,40,0.8), rgba(5,10,20,0.9));
+      border: 1px solid var(--border-light); border-radius: 16px; padding: 2.5rem 1.5rem;
+      text-align: center; transform-style: preserve-3d;
+      transition: border-color 0.3s; position: relative; overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
-
-    .roster-card:hover {
-      transform: translateY(-5px);
+    .roster-card::after {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
     }
+    .card-aravli::after { background: var(--aravli); box-shadow: 0 0 15px var(--aravli); }
+    .card-nilgiri::after { background: var(--nilgiri); box-shadow: 0 0 15px var(--nilgiri); }
+    .card-shiwalik::after { background: var(--shiwalik); box-shadow: 0 0 15px var(--shiwalik); }
+    .card-udaygiri::after { background: var(--udaygiri); box-shadow: 0 0 15px var(--udaygiri); }
+    
+    /* Elements inside 3D card */
+    .roster-card > * { transform: translateZ(30px); }
+    .roster-name { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .roster-house { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); }
 
-    .roster-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 4px;
-    }
-
-    .card-aravli::before { background: var(--aravli); }
-    .card-nilgiri::before { background: var(--nilgiri); }
-    .card-shiwalik::before { background: var(--shiwalik); }
-    .card-udaygiri::before { background: var(--udaygiri); }
-
-    .roster-name {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .roster-house {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-muted);
-    }
-
-    /* ======= THE MIDNIGHT VAULT ======= */
-    .vault-section {
-      padding: 100px 5%;
-      position: relative;
-      min-height: 500px;
-    }
-
+    /* ======= MIDNIGHT VAULT (GLITCH ENHANCED) ======= */
+    .vault-section { padding: 120px 5%; min-height: 600px; }
     .vault-lock-container {
-      background: var(--bg-card);
-      border: 1px solid var(--border-light);
-      padding: 3rem 2rem;
-      border-radius: 16px;
-      max-width: 400px;
-      margin: 0 auto;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      transition: opacity 0.5s, transform 0.5s;
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      padding: 4rem 2rem; border-radius: 20px; max-width: 450px; margin: 0 auto;
+      text-align: center; backdrop-filter: blur(15px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5); transition: opacity 0.5s, transform 0.5s;
     }
-
-    .vault-icon {
-      font-size: 3rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      transition: color 0.3s, transform 0.3s;
-    }
-
-    .vault-lock-container.unlocked .vault-icon {
-      color: var(--nilgiri);
-      transform: scale(1.1);
-    }
-
+    .vault-icon { font-size: 4rem; color: #fff; margin-bottom: 2rem; transition: 0.3s; }
+    .vault-lock-container.unlocked .vault-icon { color: var(--nilgiri); text-shadow: 0 0 20px var(--nilgiri); transform: scale(1.2); }
+    
     #vault-passcode {
-      width: 100%;
-      padding: 15px;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid var(--border-light);
-      border-radius: 8px;
-      color: var(--text-main);
-      font-size: 1.5rem;
-      text-align: center;
-      letter-spacing: 8px;
-      margin-bottom: 1.5rem;
-      outline: none;
-      transition: border-color 0.3s;
+      width: 100%; padding: 15px; background: rgba(0,0,0,0.6);
+      border: 2px solid rgba(255,255,255,0.1); border-radius: 10px;
+      color: var(--primary); font-size: 2rem; text-align: center;
+      letter-spacing: 15px; font-family: 'Space Mono', monospace; margin-bottom: 2rem;
+      outline: none; transition: 0.3s;
     }
-
-    #vault-passcode:focus {
-      border-color: var(--primary);
-    }
-
+    #vault-passcode:focus { border-color: var(--primary); box-shadow: 0 0 20px var(--primary-glow); }
+    
     .vault-btn {
-      background: var(--text-main);
-      color: var(--bg-dark);
-      border: none;
-      padding: 12px 20px;
-      width: 100%;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      background: var(--primary); color: #000; border: none; padding: 15px;
+      width: 100%; border-radius: 10px; font-weight: 700; font-size: 1.1rem;
+      cursor: pointer; text-transform: uppercase; letter-spacing: 2px;
+      transition: 0.3s; box-shadow: 0 0 20px var(--primary-glow);
+    }
+    .vault-btn:hover { background: #fff; box-shadow: 0 0 30px rgba(255,255,255,0.5); }
+    
+    .vault-error-msg { color: var(--accent); margin-top: 1.5rem; font-size: 0.9rem; opacity: 0; font-family: 'Space Mono', monospace; text-shadow: 0 0 10px var(--accent-glow); }
+    .vault-error-msg.show { opacity: 1; }
+
+    /* Glitch Animation */
+    .glitch { animation: glitch-anim 0.3s 2; border-color: var(--accent) !important; box-shadow: 0 0 30px var(--accent-glow); }
+    @keyframes glitch-anim {
+      0% { transform: translate(0) skew(0deg); filter: hue-rotate(0deg); }
+      20% { transform: translate(-10px, 5px) skew(-10deg); filter: hue-rotate(90deg); }
+      40% { transform: translate(10px, -5px) skew(10deg); filter: hue-rotate(-90deg); }
+      60% { transform: translate(-5px, 10px) skew(0deg); filter: hue-rotate(0deg); }
+      80% { transform: translate(5px, -10px) skew(5deg); filter: hue-rotate(45deg); }
+      100% { transform: translate(0) skew(0deg); filter: hue-rotate(0deg); }
     }
 
-    .vault-btn:hover {
-      background: var(--primary);
-      color: var(--text-main);
-    }
-
-    .vault-error-msg {
-      color: var(--shiwalik);
-      margin-top: 1rem;
-      font-size: 0.85rem;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .vault-error-msg.show {
-      opacity: 1;
-    }
-
-    .shake {
-      animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
-    }
-
-    @keyframes shake {
-      10%, 90% { transform: translate3d(-2px, 0, 0); }
-      20%, 80% { transform: translate3d(4px, 0, 0); }
-      30%, 50%, 70% { transform: translate3d(-8px, 0, 0); }
-      40%, 60% { transform: translate3d(8px, 0, 0); }
-    }
-
-    .vault-content {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.8s ease-in;
-    }
-
-    .vault-content.visible {
-      display: block;
-      opacity: 1;
-    }
-
-    .vault-welcome-text {
-      text-align: center;
-      color: var(--nilgiri);
-      font-weight: 600;
-      margin-bottom: 2rem;
-      letter-spacing: 1px;
-      font-size: 1.2rem;
-    }
-
-    .vault-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 15px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
+    .vault-content { display: none; opacity: 0; transition: opacity 1s; }
+    .vault-content.visible { display: block; opacity: 1; }
+    .vault-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
     .vault-item {
-      height: 200px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      border: 1px dashed var(--border-light);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: var(--text-muted);
+      height: 250px; background: rgba(255,255,255,0.02); border-radius: 16px;
+      border: 1px dashed rgba(255,255,255,0.2); display: flex; justify-content: center;
+      align-items: center; color: var(--text-muted); font-family: 'Space Mono', monospace;
     }
 
-    /* ======= CONTROLS & FOOTER ======= */
-    .controls {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      display: flex;
-      gap: 15px;
-      z-index: 1000;
-    }
-
+    /* ======= MUSIC VISUALIZER CONTROLS ======= */
+    .controls { position: fixed; bottom: 30px; right: 30px; display: flex; gap: 15px; z-index: 1000; }
     .control-btn {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid var(--border-light);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s;
+      width: 55px; height: 55px; border-radius: 50%; background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.2); color: #fff;
+      display: flex; justify-content: center; align-items: center; cursor: pointer;
+      backdrop-filter: blur(10px); transition: all 0.3s; position: relative;
     }
+    .control-btn:hover { border-color: var(--primary); color: var(--primary); box-shadow: 0 0 20px var(--primary-glow); transform: scale(1.1); }
+    
+    /* Equalizer Bars */
+    .equalizer { display: none; gap: 3px; height: 20px; align-items: flex-end; }
+    .equalizer span { display: block; width: 4px; background: var(--primary); border-radius: 2px; box-shadow: 0 0 5px var(--primary); }
+    .playing .fa-play { display: none; }
+    .playing .equalizer { display: flex; }
+    .playing .equalizer span:nth-child(1) { animation: eq 0.8s infinite alternate; }
+    .playing .equalizer span:nth-child(2) { animation: eq 0.6s infinite alternate; animation-delay: 0.2s;}
+    .playing .equalizer span:nth-child(3) { animation: eq 1s infinite alternate; animation-delay: 0.4s;}
+    @keyframes eq { 0% { height: 4px; } 100% { height: 20px; } }
 
-    .control-btn:hover {
-      background: var(--primary);
-      border-color: var(--primary);
-      transform: scale(1.1);
-    }
+    footer { padding: 3rem 5%; text-align: center; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.05); }
 
-    footer {
-      border-top: 1px solid var(--border-light);
-      padding: 2rem 5%;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    /* Mobile Responsiveness */
+    /* Responsive */
     @media (max-width: 768px) {
       .nav-links { display: none; }
-      .metrics-container { flex-direction: column; align-items: center; }
-      .metric-box { width: 100%; max-width: 300px; }
-      .board-container { height: 500px; }
-      
-      .timeline-line { left: 20px; }
-      .timeline-item, .timeline-item:nth-child(even) {
-        flex-direction: column;
-        align-items: flex-start;
-        padding-left: 50px;
-      }
-      .timeline-time, .timeline-item:nth-child(odd) .timeline-time, .timeline-item:nth-child(even) .timeline-time {
-        width: 100%;
-        text-align: left;
-        padding: 0 0 10px 0;
-      }
+      .metrics-container { flex-direction: column; }
+      .timeline-line { left: 30px; }
+      .timeline-item, .timeline-item:nth-child(even) { flex-direction: column; padding-left: 70px; align-items: flex-start; }
+      .timeline-time, .timeline-item:nth-child(odd) .timeline-time, .timeline-item:nth-child(even) .timeline-time { width: 100%; text-align: left; padding: 0 0 10px 0; }
       .timeline-content { width: 100%; }
-      .timeline-item::after { left: 20px; top: 20px; }
+      .timeline-item::after { left: 30px; }
     }
   </style>
 </head>
 
 <body>
+  <!-- Cinematic Preloader -->
+  <div id="preloader">
+    <div class="loader-text">INITIALIZING ARCHIVE...</div>
+    <div class="loader-bar"><div class="loader-progress"></div></div>
+  </div>
+
   <div class="ambient-bg"></div>
 
-  <!-- Audio Element (Replace source with 'Hum Navodaya Ho' if you have the MP3 file) -->
+  <!-- HYPE DANCE TRACK AUDIO -->
+  <!-- Note: I am using a high-energy upbeat track from Pixabay's royalty-free CDN so it works immediately. -->
   <audio id="ambient-audio" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/16/audio_96715f2122.mp3?filename=upbeat-electronic-dance-111454.mp3" type="audio/mpeg">
   </audio>
 
-  <nav>
-    <div class="logo">JNV<span>Jalna</span></div>
+  <nav id="navbar">
+    <div class="logo">JNV<span>'24</span></div>
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
-      <li><a href="#routine">Daily Routine</a></li>
-      <li><a href="#memories">Memory Board</a></li>
-      <li><a href="#roster">Classmates</a></li>
-      <li><a href="#vault">The Vault</a></li>
+      <li><a href="#routine">Routine</a></li>
+      <li><a href="#memories">Memories</a></li>
+      <li><a href="#roster">Alumni</a></li>
+      <li><a href="#vault">Vault</a></li>
     </ul>
   </nav>
 
-  <section id="home" class="hero">
-    <div class="hero-badge">Batch of 2017 – 2024</div>
-    <h1>The Legacy of<br>Class '24</h1>
-    <p>Seven years. Four houses. One family. A digital archive dedicated to the memories, the late-night studies, the morning assemblies, and the unbreakable bonds formed at Jawahar Navodaya Vidyalaya, Jalna.</p>
+  <section id="home" class="hero reveal">
+    <div class="hero-badge">RESTRICTED ACCESS: BATCH OF 2017 – 2024</div>
+    <h1>The Ultimate<br>Legacy</h1>
+    <p>Seven years of chaos, discipline, and unbreakable bonds. The official digital archive for Jawahar Navodaya Vidyalaya, Jalna — Class of 2024. Turn the music up.</p>
     
     <div class="metrics-container" id="legacy">
       <div class="metric-box">
         <div class="metric-number" id="count-days">0</div>
-        <div class="metric-label">Days Together</div>
+        <div class="metric-label">Days Lived Together</div>
       </div>
       <div class="metric-box">
         <div class="metric-number" id="count-hours">0</div>
@@ -662,62 +397,49 @@
       </div>
       <div class="metric-box">
         <div class="metric-number">4</div>
-        <div class="metric-label">Houses, 1 Home</div>
+        <div class="metric-label">Houses, 1 Family</div>
       </div>
     </div>
   </section>
 
-  <!-- A Day in the Life: The JNV Routine -->
-  <section id="routine" class="routine-section">
+  <!-- The JNV Routine -->
+  <section id="routine" class="routine-section reveal">
     <div class="section-header">
-      <h2>The Navodaya Routine</h2>
-      <p>We hated the bell, but we miss the rhythm. A typical day at JNV Jalna.</p>
+      <h2>The Daily Grind</h2>
+      <p>The bell dictated our lives. Now, it's just a memory.</p>
     </div>
-
     <div class="timeline-container">
       <div class="timeline-line"></div>
       
-      <div class="timeline-item">
+      <div class="timeline-item reveal">
         <div class="timeline-time">05:30 AM</div>
         <div class="timeline-content">
           <h3>Morning PT Fall-in</h3>
           <p>Waking up in the freezing Marathwada winter, running to the ground half-asleep hoping the MOD doesn't catch you late.</p>
         </div>
       </div>
-
-      <div class="timeline-item">
+      <div class="timeline-item reveal">
         <div class="timeline-time">08:00 AM</div>
         <div class="timeline-content">
           <h3>Morning Assembly</h3>
-          <p>House lines, uniform checks, the news reading, and singing the Navodaya Anthem together before rushing to class.</p>
+          <p>House lines, uniform checks, the news reading, and singing "Hum Navodaya Ho" together before rushing to class.</p>
         </div>
       </div>
-
-      <div class="timeline-item">
+      <div class="timeline-item reveal">
         <div class="timeline-time">01:30 PM</div>
         <div class="timeline-content">
           <h3>Mess Time (Lunch)</h3>
-          <p>The stampede to the dining hall. Fighting for the best table and begging the seniors or mess bhaiya for an extra serving of dessert.</p>
+          <p>The stampede to the dining hall. Fighting for the best table and begging for an extra serving of dessert.</p>
         </div>
       </div>
-
-      <div class="timeline-item">
+      <div class="timeline-item reveal">
         <div class="timeline-time">04:30 PM</div>
         <div class="timeline-content">
           <h3>Games & Sports</h3>
-          <p>The best time of the day. Inter-house rivalries on the volleyball court, cricket on the rough ground, and sitting on the sidelines gossiping.</p>
+          <p>The ultimate stress reliever. Inter-house rivalries on the volleyball court and cricket on the rough ground.</p>
         </div>
       </div>
-
-      <div class="timeline-item">
-        <div class="timeline-time">06:30 PM</div>
-        <div class="timeline-content">
-          <h3>Evening Prep</h3>
-          <p>Two hours of absolute silence (supposedly). Passing notes, finishing homework, and hiding novels inside textbooks.</p>
-        </div>
-      </div>
-
-      <div class="timeline-item">
+      <div class="timeline-item reveal">
         <div class="timeline-time">10:00 PM</div>
         <div class="timeline-content">
           <h3>Lights Out</h3>
@@ -727,82 +449,109 @@
     </div>
   </section>
 
-  <!-- Interactive Memory Board -->
-  <section id="memories" class="notice-board-section">
+  <!-- Notice Board -->
+  <section id="memories" class="notice-board-section reveal">
     <div class="section-header">
       <h2>The Hostel Notice Board</h2>
-      <p>Drag and arrange the memories. Relive the moments.</p>
+      <p>Drag and arrange the memories. Throw them around.</p>
     </div>
-    
     <div class="board-container" id="corkboard">
-      <!-- Notes are generated by JS -->
+      <!-- Notes injected via JS -->
     </div>
   </section>
 
-  <!-- Professional Classmate Roster -->
-  <section id="roster" class="roster-section">
+  <!-- 3D Roster -->
+  <section id="roster" class="roster-section reveal">
     <div class="section-header">
       <h2>The Alumni Roster</h2>
-      <p>The minds that shaped the batch of '24.</p>
+      <p>Hover over the cards to see the 3D holographic effect.</p>
     </div>
-
-    <div class="filter-container">
-      <button class="filter-btn active" data-filter="all">All Alumni</button>
-      <button class="filter-btn" data-filter="aravli">Aravli</button>
-      <button class="filter-btn" data-filter="nilgiri">Nilgiri</button>
-      <button class="filter-btn" data-filter="shiwalik">Shiwalik</button>
-      <button class="filter-btn" data-filter="udaygiri">Udaygiri</button>
-    </div>
-
     <div class="roster-grid" id="roster-grid">
-      <!-- Grid items populated by JS -->
+      <!-- Roster cards injected via JS -->
     </div>
   </section>
 
-  <!-- The Midnight Vault -->
-  <section id="vault" class="vault-section">
+  <!-- Glitch Vault -->
+  <section id="vault" class="vault-section reveal">
     <div class="section-header">
       <h2>The Midnight Vault</h2>
-      <p>Some memories are strictly for the batch. Enter our graduation year to unlock.</p>
+      <p>Highly classified. Enter the graduation year to decrypt the archive.</p>
     </div>
 
-    <!-- Lock Screen -->
     <div id="vault-lock" class="vault-lock-container">
       <i class="fas fa-lock vault-icon" id="vault-icon"></i>
-      <input type="password" id="vault-passcode" placeholder="Passcode" maxlength="4">
-      <button id="vault-unlock-btn" class="vault-btn">Access Vault</button>
-      <p id="vault-error" class="vault-error-msg">Incorrect passcode. Try again.</p>
+      <input type="password" id="vault-passcode" placeholder="****" maxlength="4" autocomplete="off">
+      <button id="vault-unlock-btn" class="vault-btn">Decrypt</button>
+      <p id="vault-error" class="vault-error-msg">ACCESS DENIED. UNAUTHORIZED USER.</p>
     </div>
 
-    <!-- Hidden Gallery (Revealed upon unlock) -->
     <div id="vault-content" class="vault-content">
-      <p class="vault-welcome-text">Access Granted. Welcome back, Class of '24.</p>
+      <h3 style="text-align:center; color:var(--primary); font-family:'Space Mono'; font-size: 2rem; margin-bottom: 2rem;">DECRYPTION SUCCESSFUL</h3>
       <div class="vault-grid">
-        <!-- Add your secret images here -->
-        <div class="vault-item">Secret Photo Placeholder 1</div>
-        <div class="vault-item">Secret Photo Placeholder 2</div>
-        <div class="vault-item">Secret Photo Placeholder 3</div>
-        <div class="vault-item">Secret Photo Placeholder 4</div>
+        <div class="vault-item">[IMG_7493.JPG MISSING]</div>
+        <div class="vault-item">[IMG_2023.JPG MISSING]</div>
+        <div class="vault-item">[IMG_FAREWELL.JPG MISSING]</div>
+        <div class="vault-item">[IMG_NIGHTOUT.JPG MISSING]</div>
       </div>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2024 Jawahar Navodaya Vidyalaya, Jalna — Batch of '24. Crafted with nostalgia.</p>
+    <p>&copy; 2024 Jawahar Navodaya Vidyalaya, Jalna. The Legacy Lives On.</p>
   </footer>
 
+  <!-- Music & Scroll Controls -->
   <div class="controls">
-    <button class="control-btn" id="audio-toggle" title="Play Nostalgia Audio">
+    <button class="control-btn" id="audio-toggle" title="Start The Party">
       <i class="fas fa-play"></i>
+      <div class="equalizer">
+        <span></span><span></span><span></span>
+      </div>
     </button>
-    <button class="control-btn" id="scroll-top" style="display: none;" title="Back to Top">
+    <button class="control-btn" id="scroll-top" style="opacity: 0; pointer-events: none;" title="Back to Top">
       <i class="fas fa-arrow-up"></i>
     </button>
   </div>
 
   <script>
     /* =========================================
-       1. TIME MACHINE COUNTER ANIMATION
+       1. PRELOADER & NAVBAR HIDE
+       ========================================= */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const preloader = document.getElementById('preloader');
+        preloader.style.opacity = '0';
+        setTimeout(() => preloader.style.visibility = 'hidden', 1000);
+      }, 2000); // 2 second cinematic load
+    });
+
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      const currentScroll = window.pageYOffset;
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        navbar.style.transform = 'translateY(-100%)'; // Hide on scroll down
+      } else {
+        navbar.style.transform = 'translateY(0)'; // Show on scroll up
+      }
+      lastScroll = currentScroll;
+    });
+
+    /* =========================================
+       2. SCROLL REVEAL ANIMATIONS
+       ========================================= */
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    /* =========================================
+       3. TIME MACHINE COUNTER
        ========================================= */
     function animateValue(obj, start, end, duration) {
       let startTimestamp = null;
@@ -811,53 +560,46 @@
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
         const easeProgress = 1 - Math.pow(1 - progress, 4); 
         obj.innerHTML = Math.floor(easeProgress * (end - start) + start).toLocaleString();
-        if (progress < 1) {
-          window.requestAnimationFrame(step);
-        }
+        if (progress < 1) window.requestAnimationFrame(step);
       };
       window.requestAnimationFrame(step);
     }
 
-    const observer = new IntersectionObserver((entries) => {
+    const legacyObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          animateValue(document.getElementById("count-days"), 0, 2555, 2500); 
-          animateValue(document.getElementById("count-hours"), 0, 61320, 3000); 
-          observer.unobserve(entry.target);
+          animateValue(document.getElementById("count-days"), 0, 2555, 3000); 
+          animateValue(document.getElementById("count-hours"), 0, 61320, 3500); 
+          legacyObserver.unobserve(entry.target);
         }
       });
     });
-    observer.observe(document.getElementById("legacy"));
+    legacyObserver.observe(document.getElementById("legacy"));
 
     /* =========================================
-       2. INTERACTIVE DRAGGABLE NOTICE BOARD
+       4. DRAGGABLE STICKY NOTES
        ========================================= */
     const board = document.getElementById('corkboard');
     const memories = [
       { text: "Mess food on Sundays... never forget the paneer fight! 😂", author: "Mayur" },
       { text: "PT at 5:30 AM in winter. The absolute worst, but we survived.", author: "Akanksha" },
       { text: "Hiding phones during house master inspection.", author: "Ajay" },
-      { text: "Winning the inter-house volleyball cup 🏆", author: "Satwik" },
+      { text: "Winning the inter-house cup 🏆", author: "Satwik" },
       { text: "Late night ghost stories in the senior dorms.", author: "Abhinav" },
       { text: "The feeling when the vacation bell finally rang.", author: "Shruti" }
     ];
 
-    memories.forEach((mem, index) => {
+    memories.forEach((mem) => {
       const note = document.createElement('div');
       note.className = 'sticky-note';
       const rot = Math.floor(Math.random() * 20) - 10;
-      const posX = Math.floor(Math.random() * 70) + 5; 
-      const posY = Math.floor(Math.random() * 70) + 5;
+      const posX = Math.floor(Math.random() * 75) + 5; 
+      const posY = Math.floor(Math.random() * 75) + 5;
       
       note.style.transform = `rotate(${rot}deg)`;
       note.style.left = `${posX}%`;
       note.style.top = `${posY}%`;
-      
-      note.innerHTML = `
-        <div class="note-pin"></div>
-        "${mem.text}"
-        <span class="note-author">— ${mem.author}</span>
-      `;
+      note.innerHTML = `<div class="tape"></div>"${mem.text}"<span class="note-author">— ${mem.author}</span>`;
       board.appendChild(note);
       makeDraggable(note);
     });
@@ -865,99 +607,82 @@
     function makeDraggable(elmnt) {
       let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
       elmnt.onmousedown = dragMouseDown;
-      
-      elmnt.ontouchstart = function(e) {
-        e.preventDefault();
-        pos3 = e.touches[0].clientX;
-        pos4 = e.touches[0].clientY;
-        document.ontouchend = closeDragElement;
-        document.ontouchmove = elementDragTouch;
-      };
-
-      function dragMouseDown(e) {
-        e = e || window.event;
-        e.preventDefault();
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        document.onmouseup = closeDragElement;
-        document.onmousemove = elementDrag;
-      }
-
-      function elementDrag(e) {
-        e = e || window.event;
-        e.preventDefault();
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-      }
-
-      function elementDragTouch(e) {
-        pos1 = pos3 - e.touches[0].clientX;
-        pos2 = pos4 - e.touches[0].clientY;
-        pos3 = e.touches[0].clientX;
-        pos4 = e.touches[0].clientY;
-        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-      }
-
-      function closeDragElement() {
-        document.onmouseup = null;
-        document.onmousemove = null;
-        document.ontouchend = null;
-        document.ontouchmove = null;
-      }
+      elmnt.ontouchstart = (e) => { e.preventDefault(); pos3 = e.touches[0].clientX; pos4 = e.touches[0].clientY; document.ontouchend = closeDragElement; document.ontouchmove = elementDragTouch; };
+      function dragMouseDown(e) { e = e || window.event; e.preventDefault(); pos3 = e.clientX; pos4 = e.clientY; document.onmouseup = closeDragElement; document.onmousemove = elementDrag; }
+      function elementDrag(e) { e = e || window.event; e.preventDefault(); pos1 = pos3 - e.clientX; pos2 = pos4 - e.clientY; pos3 = e.clientX; pos4 = e.clientY; elmnt.style.top = (elmnt.offsetTop - pos2) + "px"; elmnt.style.left = (elmnt.offsetLeft - pos1) + "px"; }
+      function elementDragTouch(e) { pos1 = pos3 - e.touches[0].clientX; pos2 = pos4 - e.touches[0].clientY; pos3 = e.touches[0].clientX; pos4 = e.touches[0].clientY; elmnt.style.top = (elmnt.offsetTop - pos2) + "px"; elmnt.style.left = (elmnt.offsetLeft - pos1) + "px"; }
+      function closeDragElement() { document.onmouseup = null; document.onmousemove = null; document.ontouchend = null; document.ontouchmove = null; }
     }
 
     /* =========================================
-       3. CLASSMATES ROSTER GENERATOR & FILTER
+       5. 3D HOLOGRAPHIC ROSTER
        ========================================= */
     const classmates = [
-      { name: "Abhinav", house: "udaygiri" },
-      { name: "Aditya", house: "udaygiri" },
-      { name: "Ajay", house: "nilgiri" },
-      { name: "Ajinkya", house: "aravli" },
-      { name: "Akanksha", house: "shiwalik" },
-      { name: "Akash", house: "shiwalik" },
-      { name: "Mayur Y", house: "nilgiri" },
-      { name: "Satwik L", house: "udaygiri" },
-      { name: "Shruti", house: "aravli" },
-      { name: "Prasad", house: "aravli" },
-      { name: "Rutuja K", house: "nilgiri" },
-      { name: "Vishnu", house: "shiwalik" }
+      { name: "Abhinav", house: "udaygiri" }, { name: "Aditya", house: "udaygiri" },
+      { name: "Ajay", house: "nilgiri" }, { name: "Ajinkya", house: "aravli" },
+      { name: "Akanksha", house: "shiwalik" }, { name: "Akash", house: "shiwalik" },
+      { name: "Mayur Y", house: "nilgiri" }, { name: "Satwik L", house: "udaygiri" },
+      { name: "Shruti", house: "aravli" }, { name: "Prasad", house: "aravli" },
+      { name: "Rutuja K", house: "nilgiri" }, { name: "Vishnu", house: "shiwalik" }
     ];
 
     const grid = document.getElementById('roster-grid');
-    
-    function renderRoster(filter = 'all') {
-      grid.innerHTML = '';
-      classmates.forEach(person => {
-        if(filter === 'all' || person.house === filter) {
-          const card = document.createElement('div');
-          card.className = `roster-card card-${person.house}`;
-          card.innerHTML = `
-            <div class="roster-name">${person.name}</div>
-            <div class="roster-house">${person.house} House</div>
-          `;
-          grid.appendChild(card);
-        }
+    classmates.forEach(person => {
+      const card = document.createElement('div');
+      card.className = `roster-card card-${person.house}`;
+      card.innerHTML = `<div class="roster-name">${person.name}</div><div class="roster-house">${person.house} House</div>`;
+      grid.appendChild(card);
+      
+      // 3D Tilt Effect Logic
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -15; // Max 15deg rotation
+        const rotateY = ((x - centerX) / centerX) * 15;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
       });
-    }
-
-    renderRoster(); 
-
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        renderRoster(e.target.dataset.filter);
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
       });
     });
 
     /* =========================================
-       4. AUDIO TOGGLE & SCROLL TO TOP
+       6. THE GLITCH VAULT
+       ========================================= */
+    const vaultBtn = document.getElementById('vault-unlock-btn');
+    const vaultInput = document.getElementById('vault-passcode');
+    const lockContainer = document.getElementById('vault-lock');
+    const vaultContent = document.getElementById('vault-content');
+    const vaultError = document.getElementById('vault-error');
+    const vaultIcon = document.getElementById('vault-icon');
+    const PASSCODE = "2024";
+
+    function attemptUnlock() {
+      if (vaultInput.value.trim() === PASSCODE) {
+        vaultIcon.classList.remove('fa-lock'); vaultIcon.classList.add('fa-unlock-alt');
+        lockContainer.classList.add('unlocked'); vaultError.classList.remove('show');
+        setTimeout(() => {
+          lockContainer.style.opacity = '0'; lockContainer.style.transform = 'scale(0.8)';
+          setTimeout(() => {
+            lockContainer.style.display = 'none'; vaultContent.classList.add('visible');
+          }, 500);
+        }, 800);
+      } else {
+        // Glitch Effect
+        lockContainer.classList.add('glitch');
+        vaultError.classList.add('show');
+        vaultInput.value = '';
+        setTimeout(() => lockContainer.classList.remove('glitch'), 600);
+      }
+    }
+    vaultBtn.addEventListener('click', attemptUnlock);
+    vaultInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') attemptUnlock(); });
+
+    /* =========================================
+       7. AUDIO VISUALIZER & SCROLL TO TOP
        ========================================= */
     const audioBtn = document.getElementById('audio-toggle');
     const audio = document.getElementById('ambient-audio');
@@ -966,76 +691,24 @@
     audioBtn.addEventListener('click', () => {
       if (isPlaying) {
         audio.pause();
-        audioBtn.innerHTML = '<i class="fas fa-play"></i>';
+        audioBtn.classList.remove('playing');
       } else {
+        audio.volume = 0.5; // Perfect background volume
         audio.play();
-        audioBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        audioBtn.classList.add('playing');
       }
       isPlaying = !isPlaying;
     });
 
     const scrollBtn = document.getElementById('scroll-top');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 400) {
-        scrollBtn.style.display = 'flex';
+      if (window.scrollY > 500) {
+        scrollBtn.style.opacity = '1'; scrollBtn.style.pointerEvents = 'all';
       } else {
-        scrollBtn.style.display = 'none';
+        scrollBtn.style.opacity = '0'; scrollBtn.style.pointerEvents = 'none';
       }
     });
-
-    scrollBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    /* =========================================
-       5. THE MIDNIGHT VAULT LOGIC
-       ========================================= */
-    const vaultBtn = document.getElementById('vault-unlock-btn');
-    const vaultInput = document.getElementById('vault-passcode');
-    const lockContainer = document.getElementById('vault-lock');
-    const vaultContent = document.getElementById('vault-content');
-    const vaultError = document.getElementById('vault-error');
-    const vaultIcon = document.getElementById('vault-icon');
-
-    const PASSCODE = "2024";
-
-    function attemptUnlock() {
-      const enteredCode = vaultInput.value.trim();
-      
-      if (enteredCode === PASSCODE) {
-        vaultIcon.classList.remove('fa-lock');
-        vaultIcon.classList.add('fa-lock-open');
-        lockContainer.classList.add('unlocked');
-        vaultError.classList.remove('show');
-        
-        setTimeout(() => {
-          lockContainer.style.opacity = '0';
-          lockContainer.style.transform = 'scale(0.9)';
-          
-          setTimeout(() => {
-            lockContainer.style.display = 'none';
-            vaultContent.classList.add('visible');
-          }, 500);
-        }, 600);
-
-      } else {
-        lockContainer.classList.add('shake');
-        vaultError.classList.add('show');
-        vaultInput.value = '';
-        
-        setTimeout(() => {
-          lockContainer.classList.remove('shake');
-        }, 400);
-      }
-    }
-
-    vaultBtn.addEventListener('click', attemptUnlock);
-
-    vaultInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        attemptUnlock();
-      }
-    });
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   </script>
 </body>
 </html>
