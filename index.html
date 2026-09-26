@@ -74,6 +74,7 @@
       color: var(--text-main);
       letter-spacing: 1px;
     }
+    
     .logo span {
       color: var(--primary);
     }
@@ -255,6 +256,103 @@
       color: #64748b;
     }
 
+    /* ======= JNV ROUTINE TIMELINE ======= */
+    .routine-section {
+      padding: 100px 5%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .timeline-container {
+      position: relative;
+      margin-top: 3rem;
+    }
+
+    .timeline-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(56, 189, 248, 0.2);
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      position: relative;
+      width: 100%;
+    }
+
+    /* Alternate items left and right */
+    .timeline-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .timeline-time {
+      width: 45%;
+      font-size: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      font-weight: 600;
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-time {
+      text-align: right;
+      padding-right: 2rem;
+    }
+
+    .timeline-item:nth-child(even) .timeline-time {
+      text-align: left;
+      padding-left: 2rem;
+    }
+
+    .timeline-content {
+      width: 45%;
+      background: var(--bg-card);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .timeline-content:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+    }
+
+    .timeline-content h3 {
+      font-size: 1.2rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-content p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* The glowing dot on the timeline */
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 16px;
+      height: 16px;
+      background: var(--bg-dark);
+      border: 3px solid var(--accent);
+      border-radius: 50%;
+      z-index: 2;
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+    }
+
     /* ======= CLASSMATES ROSTER ======= */
     .roster-section {
       padding: 100px 5%;
@@ -333,6 +431,139 @@
       color: var(--text-muted);
     }
 
+    /* ======= THE MIDNIGHT VAULT ======= */
+    .vault-section {
+      padding: 100px 5%;
+      position: relative;
+      min-height: 500px;
+    }
+
+    .vault-lock-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      padding: 3rem 2rem;
+      border-radius: 16px;
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      transition: opacity 0.5s, transform 0.5s;
+    }
+
+    .vault-icon {
+      font-size: 3rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .vault-lock-container.unlocked .vault-icon {
+      color: var(--nilgiri);
+      transform: scale(1.1);
+    }
+
+    #vault-passcode {
+      width: 100%;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      color: var(--text-main);
+      font-size: 1.5rem;
+      text-align: center;
+      letter-spacing: 8px;
+      margin-bottom: 1.5rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    #vault-passcode:focus {
+      border-color: var(--primary);
+    }
+
+    .vault-btn {
+      background: var(--text-main);
+      color: var(--bg-dark);
+      border: none;
+      padding: 12px 20px;
+      width: 100%;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .vault-btn:hover {
+      background: var(--primary);
+      color: var(--text-main);
+    }
+
+    .vault-error-msg {
+      color: var(--shiwalik);
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .vault-error-msg.show {
+      opacity: 1;
+    }
+
+    .shake {
+      animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+    }
+
+    @keyframes shake {
+      10%, 90% { transform: translate3d(-2px, 0, 0); }
+      20%, 80% { transform: translate3d(4px, 0, 0); }
+      30%, 50%, 70% { transform: translate3d(-8px, 0, 0); }
+      40%, 60% { transform: translate3d(8px, 0, 0); }
+    }
+
+    .vault-content {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.8s ease-in;
+    }
+
+    .vault-content.visible {
+      display: block;
+      opacity: 1;
+    }
+
+    .vault-welcome-text {
+      text-align: center;
+      color: var(--nilgiri);
+      font-weight: 600;
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
+      font-size: 1.2rem;
+    }
+
+    .vault-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .vault-item {
+      height: 200px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      border: 1px dashed var(--border-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--text-muted);
+    }
+
     /* ======= CONTROLS & FOOTER ======= */
     .controls {
       position: fixed;
@@ -372,11 +603,26 @@
       font-size: 0.9rem;
     }
 
+    /* Mobile Responsiveness */
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .metrics-container { flex-direction: column; align-items: center; }
       .metric-box { width: 100%; max-width: 300px; }
       .board-container { height: 500px; }
+      
+      .timeline-line { left: 20px; }
+      .timeline-item, .timeline-item:nth-child(even) {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 50px;
+      }
+      .timeline-time, .timeline-item:nth-child(odd) .timeline-time, .timeline-item:nth-child(even) .timeline-time {
+        width: 100%;
+        text-align: left;
+        padding: 0 0 10px 0;
+      }
+      .timeline-content { width: 100%; }
+      .timeline-item::after { left: 20px; top: 20px; }
     }
   </style>
 </head>
@@ -384,7 +630,7 @@
 <body>
   <div class="ambient-bg"></div>
 
-  <!-- Audio Element -->
+  <!-- Audio Element (Replace source with 'Hum Navodaya Ho' if you have the MP3 file) -->
   <audio id="ambient-audio" loop>
     <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
   </audio>
@@ -393,9 +639,10 @@
     <div class="logo">JNV<span>Jalna</span></div>
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
-      <li><a href="#legacy">The Legacy</a></li>
-      <li><a href="#roster">Classmates</a></li>
+      <li><a href="#routine">Daily Routine</a></li>
       <li><a href="#memories">Memory Board</a></li>
+      <li><a href="#roster">Classmates</a></li>
+      <li><a href="#vault">The Vault</a></li>
     </ul>
   </nav>
 
@@ -416,6 +663,66 @@
       <div class="metric-box">
         <div class="metric-number">4</div>
         <div class="metric-label">Houses, 1 Home</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- A Day in the Life: The JNV Routine -->
+  <section id="routine" class="routine-section">
+    <div class="section-header">
+      <h2>The Navodaya Routine</h2>
+      <p>We hated the bell, but we miss the rhythm. A typical day at JNV Jalna.</p>
+    </div>
+
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+      
+      <div class="timeline-item">
+        <div class="timeline-time">05:30 AM</div>
+        <div class="timeline-content">
+          <h3>Morning PT Fall-in</h3>
+          <p>Waking up in the freezing Marathwada winter, running to the ground half-asleep hoping the MOD doesn't catch you late.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">08:00 AM</div>
+        <div class="timeline-content">
+          <h3>Morning Assembly</h3>
+          <p>House lines, uniform checks, the news reading, and singing the Navodaya Anthem together before rushing to class.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">01:30 PM</div>
+        <div class="timeline-content">
+          <h3>Mess Time (Lunch)</h3>
+          <p>The stampede to the dining hall. Fighting for the best table and begging the seniors or mess bhaiya for an extra serving of dessert.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">04:30 PM</div>
+        <div class="timeline-content">
+          <h3>Games & Sports</h3>
+          <p>The best time of the day. Inter-house rivalries on the volleyball court, cricket on the rough ground, and sitting on the sidelines gossiping.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">06:30 PM</div>
+        <div class="timeline-content">
+          <h3>Evening Prep</h3>
+          <p>Two hours of absolute silence (supposedly). Passing notes, finishing homework, and hiding novels inside textbooks.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">10:00 PM</div>
+        <div class="timeline-content">
+          <h3>Lights Out</h3>
+          <p>House master rounds, whispering in the dark, ghost stories, and planning the next day. The true bonding hours.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -452,6 +759,34 @@
     </div>
   </section>
 
+  <!-- The Midnight Vault -->
+  <section id="vault" class="vault-section">
+    <div class="section-header">
+      <h2>The Midnight Vault</h2>
+      <p>Some memories are strictly for the batch. Enter our graduation year to unlock.</p>
+    </div>
+
+    <!-- Lock Screen -->
+    <div id="vault-lock" class="vault-lock-container">
+      <i class="fas fa-lock vault-icon" id="vault-icon"></i>
+      <input type="password" id="vault-passcode" placeholder="Passcode" maxlength="4">
+      <button id="vault-unlock-btn" class="vault-btn">Access Vault</button>
+      <p id="vault-error" class="vault-error-msg">Incorrect passcode. Try again.</p>
+    </div>
+
+    <!-- Hidden Gallery (Revealed upon unlock) -->
+    <div id="vault-content" class="vault-content">
+      <p class="vault-welcome-text">Access Granted. Welcome back, Class of '24.</p>
+      <div class="vault-grid">
+        <!-- Add your secret images here -->
+        <div class="vault-item">Secret Photo Placeholder 1</div>
+        <div class="vault-item">Secret Photo Placeholder 2</div>
+        <div class="vault-item">Secret Photo Placeholder 3</div>
+        <div class="vault-item">Secret Photo Placeholder 4</div>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <p>&copy; 2024 Jawahar Navodaya Vidyalaya, Jalna — Batch of '24. Crafted with nostalgia.</p>
   </footer>
@@ -474,7 +809,6 @@
       const step = (timestamp) => {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        // easeOutQuart interpolation
         const easeProgress = 1 - Math.pow(1 - progress, 4); 
         obj.innerHTML = Math.floor(easeProgress * (end - start) + start).toLocaleString();
         if (progress < 1) {
@@ -484,12 +818,11 @@
       window.requestAnimationFrame(step);
     }
 
-    // Trigger animation when metrics are in view
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          animateValue(document.getElementById("count-days"), 0, 2555, 2500); // 7 years in days
-          animateValue(document.getElementById("count-hours"), 0, 61320, 3000); // 7 years in hours
+          animateValue(document.getElementById("count-days"), 0, 2555, 2500); 
+          animateValue(document.getElementById("count-hours"), 0, 61320, 3000); 
           observer.unobserve(entry.target);
         }
       });
@@ -512,9 +845,8 @@
     memories.forEach((mem, index) => {
       const note = document.createElement('div');
       note.className = 'sticky-note';
-      // Random rotation and position
       const rot = Math.floor(Math.random() * 20) - 10;
-      const posX = Math.floor(Math.random() * 70) + 5; // percentage
+      const posX = Math.floor(Math.random() * 70) + 5; 
       const posY = Math.floor(Math.random() * 70) + 5;
       
       note.style.transform = `rotate(${rot}deg)`;
@@ -534,7 +866,6 @@
       let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
       elmnt.onmousedown = dragMouseDown;
       
-      // Touch support for mobile
       elmnt.ontouchstart = function(e) {
         e.preventDefault();
         pos3 = e.touches[0].clientX;
@@ -615,7 +946,7 @@
       });
     }
 
-    renderRoster(); // Initial render
+    renderRoster(); 
 
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -654,6 +985,56 @@
 
     scrollBtn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* =========================================
+       5. THE MIDNIGHT VAULT LOGIC
+       ========================================= */
+    const vaultBtn = document.getElementById('vault-unlock-btn');
+    const vaultInput = document.getElementById('vault-passcode');
+    const lockContainer = document.getElementById('vault-lock');
+    const vaultContent = document.getElementById('vault-content');
+    const vaultError = document.getElementById('vault-error');
+    const vaultIcon = document.getElementById('vault-icon');
+
+    const PASSCODE = "2024";
+
+    function attemptUnlock() {
+      const enteredCode = vaultInput.value.trim();
+      
+      if (enteredCode === PASSCODE) {
+        vaultIcon.classList.remove('fa-lock');
+        vaultIcon.classList.add('fa-lock-open');
+        lockContainer.classList.add('unlocked');
+        vaultError.classList.remove('show');
+        
+        setTimeout(() => {
+          lockContainer.style.opacity = '0';
+          lockContainer.style.transform = 'scale(0.9)';
+          
+          setTimeout(() => {
+            lockContainer.style.display = 'none';
+            vaultContent.classList.add('visible');
+          }, 500);
+        }, 600);
+
+      } else {
+        lockContainer.classList.add('shake');
+        vaultError.classList.add('show');
+        vaultInput.value = '';
+        
+        setTimeout(() => {
+          lockContainer.classList.remove('shake');
+        }, 400);
+      }
+    }
+
+    vaultBtn.addEventListener('click', attemptUnlock);
+
+    vaultInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        attemptUnlock();
+      }
     });
   </script>
 </body>
